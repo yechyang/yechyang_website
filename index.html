@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ye Chyang's Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="loading-screen">
+        <div id="circle1" class="circle"></div>
+        <div id="circle2" class="circle"></div>
+        <div id="loading-text">
+            <span class="letter">W</span>
+            <span class="letter">E</span>
+            <span class="letter">L</span>
+            <span class="letter">C</span>
+            <span class="letter">O</span>
+            <span class="letter">M</span>
+            <span class="letter">E</span>
+        </div>
+    </div>
+
+    <div id="content" style="display:none;">
+        <header id="main-header">
+            <h1>YE CHYANG'S WEBSITE</h1>
+            <nav>
+                <ul>
+                    <li><a href="#credits">RESUME</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="background-section">
+            <div class="background-content">
+                <h1>KOH YE CHYANG</h1>
+                <p>An IT student based in Singapore, focused on technology and honing my skills through hands-on projects and continuous learning.</p>
+            </div>
+        </section>
+
+        <section id="profile-section">
+            <div class="profile-container">
+                <div class="profile-frame">
+                    <div class="profile-image-rectangle">
+                        <img src="./images/profile.jpg" alt="Profile Image of Jey">
+                    </div>
+                </div>
+                <div class="profile-text">
+                    <h2>Koh Ye Chyang</h2>
+                    <p>
+                        I'm Ye Chyang, an IT student pursuing a diploma in Information Technology at Ngee Ann Polytechnic in Singapore. I currently reside in Singapore, where I am dedicated to expanding my knowledge and skills in the field of technology.
+                    </p>
+                    <p>
+                        I am passionate about technology and continuously seek opportunities to enhance my skills through hands-on projects. I believe in giving my best in everything I do.
+                    </p>
+                    <button class="contact-button">Get in Touch</button>
+                </div>
+                <div class="sticky-image">
+                    <img src="./images/barn.png" alt="Sticky Image">
+                </div>
+            </div>
+        </section>
+        
+        <section id="about-us-section">
+            <div class="card-stack-container">
+                <div class="card-icon left-icon">>></div>
+                <div class="card-icon right-icon"><<</div>
+                <div class="card card-1">
+                    <div class="card1-Title">
+                        <h1>My Projects</h1>
+                        <p>Check out the projects I’ve worked on that showcase my technical skills and creativity. 
+                            From designing user-friendly websites to developing functional applications.
+                        </p>
+                        <img src="./images/down.png" alt="Scroll Down" class="scroll-down-image">
+                    </div>
+                </div>
+                <div class="card card-2">
+                    <div class="card2-Title">
+                        <h2>Website</h2>
+                        <h1>Clothing E-Commerce</h1>
+                        <p>A clothing shop platform that I designed and developed, featuring various functionalities such as search and filtering options, a secure shopping cart and checkout process,
+                             and user account management.
+                             The platform also offers points to customer to use for discount.</p>
+                        <a href="https://yechyang.github.io/FED_Assignment_2/" target="_blank">
+                            <button>Website</button>
+                        </a>
+                        <h3>Source Code: <a href="https://github.com/yechyang/FED_Assignment_2" target="_blank" style="color: #007BFF;">Click Here!</a></h3>
+                    </div>
+                    <div class="css-tablet-frame">
+                        <video class="tablet-video" controls>
+                            <source src="./videos/sample-video.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="card card-3">
+                    <h2>Card 3 Title</h2>
+                    <p>Card 3 content goes here.</p>
+                </div>
+                <div class="card card-4">
+                    <h2>Card 4 Title</h2>
+                    <p>Card 4 content goes here.</p>
+                </div>
+            </div>
+        </section>        
+        
+        <button id="chatbot-toggle" class="chatbot-toggle">Chat</button>
+
+        <!-- Chatbot Section -->
+        <section id="chatbot-section" class="chatbot-fixed chatbot-hidden">
+            <div class="chat-container">
+                <button id="close-chatbot" class="close-chatbot">&times;</button>
+                <div id="chat-output" class="chat-output"></div>
+                <input type="text" id="user-input" class="chat-input" placeholder="Type your message..." />
+                <button id="send-button" class="chat-button">Send</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="./javascript/loadingscreen.js"></script>
+    <script src="./javascript/background-slider.js"></script>
+    <!-- <script src="./javascript/nav.js"></script> -->
+    <script src="./javascript/scroll.js"></script>
+    <script src="./javascript/chatbot.js"></script>
+
+    <script type="importmap">
+        {
+        "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+        }
+    </script>
+
+    <script type="module">
+        import { GoogleGenerativeAI } from "@google/generative-ai";
+
+        async function generateResponse(prompt) {
+            try {
+                const API_KEY = "AIzaSyApzw-VJFLRHcfnI_-zacfVrAf7yV61O0A";
+                const genAI = new GoogleGenerativeAI(API_KEY);
+                const model = await genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+                const result = await model.generateContent(prompt);
+                
+                return result.response.text();
+            } catch (error) {
+                console.error('Error generating content:', error);
+                return "Sorry, I couldn't generate a response.";
+            }
+        }
+
+        document.getElementById('send-button').addEventListener('click', async () => {
+            const userInput = document.getElementById('user-input').value;
+            if (userInput.trim() === "") return;
+
+            // Display user message
+            const chatOutput = document.getElementById('chat-output');
+            chatOutput.innerHTML += `<div class="user-message"><strong>You:</strong> ${userInput}</div>`;
+            document.getElementById('user-input').value = "";
+
+            // Generate chatbot response
+            const response = await generateResponse(userInput);
+            chatOutput.innerHTML += `<div class="bot-message"><strong>Bot:</strong> ${response}</div>`;
+
+            // Scroll to the latest message
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        });
+    </script>
+</body>
+</html>
