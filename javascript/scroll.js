@@ -6,7 +6,6 @@ document.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
 
     const extendedHeight = viewportHeight * 3; // Increase the scroll range between cards
-    const delayFactor = 0.5 * extendedHeight; // Delay before the next card starts appearing
 
     cards.forEach((card, index) => {
         const cardStart = sectionTop + index * extendedHeight;
@@ -18,9 +17,9 @@ document.addEventListener('scroll', () => {
             card.style.zIndex = 10;
             card.classList.add('active');
             card.classList.remove('inactive');
-        } else if (scrollY >= cardStart && scrollY <= cardEnd - delayFactor) {
-            // Move the other cards based on a more gradual scroll percentage
-            const scrollPercent = (scrollY - cardStart) / (extendedHeight - delayFactor);
+        } else if (scrollY >= cardStart && scrollY <= cardEnd) {
+            // Move the other cards based on a gradual scroll percentage
+            const scrollPercent = (scrollY - cardStart) / extendedHeight;
             card.style.transform = `translateY(${viewportHeight - scrollPercent * viewportHeight}px)`; // Start from the bottom and move up
             card.style.zIndex = 10 + index;
             card.classList.add('active');
@@ -30,8 +29,8 @@ document.addEventListener('scroll', () => {
             card.style.transform = `translateY(100vh)`; // Place off-screen below
             card.classList.remove('active');
             card.classList.add('inactive');
-        } else if (scrollY > cardEnd - delayFactor) {
-            // Fix the card in place once it's fully in view with a delay
+        } else if (scrollY > cardEnd) {
+            // Fix the card in place once it's fully in view
             card.style.transform = `translateY(0)`; // Set to final position
             card.classList.add('active');
             card.classList.remove('inactive');
